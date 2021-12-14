@@ -15,4 +15,7 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
     @Query("select t from Transaction t where t.account.id = :id")
     List<Transaction> getTransactionsByAccountId(@Param("id") Long id);
 
+    @Query("select t.subTransactions from Transaction t where t.id = :id")
+    List<Transaction> getSubTransactionsById(@Param("id") Long id);
+
 }
