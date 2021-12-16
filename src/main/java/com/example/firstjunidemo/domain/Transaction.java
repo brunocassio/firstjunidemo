@@ -15,8 +15,8 @@ public class Transaction {
     @ManyToOne
     private Account account;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Transaction> parentTransactions;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Transaction parentTransactions;
 
     @OneToMany(mappedBy = "parentTransactions")
     private Set<Transaction> subTransactions;
@@ -45,11 +45,11 @@ public class Transaction {
         this.account = account;
     }
 
-    public Set<Transaction> getParentTransactions() {
+    public Transaction getParentTransactions() {
         return parentTransactions;
     }
 
-    public void setParentTransactions(Set<Transaction> parentTransactions) {
+    public void setParentTransactions(Transaction parentTransactions) {
         this.parentTransactions = parentTransactions;
     }
 
