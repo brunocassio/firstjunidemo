@@ -9,9 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -38,7 +36,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         transactionPayPalEUR1.setCategory("Payment gateways");
         transactionPayPalEUR1.setDate(new Date());
         transactionPayPalEUR1.setDescription("The New York Times Co.");
-        transactionPayPalEUR1.setParentTransactions(transactionPayPalEUR1);
+//        transactionPayPalEUR1.setParentTransactions(transactionPayPalEUR1);
 
         Transaction transactionPayPalEUR2 = new Transaction();
         transactionPayPalEUR2.setAccount(accountPayPal);
@@ -46,7 +44,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         transactionPayPalEUR2.setCategory("Payment gateways");
         transactionPayPalEUR2.setDate(new Date());
         transactionPayPalEUR2.setDescription("From British Pound");
-        transactionPayPalEUR2.setParentTransactions(transactionPayPalEUR2);
+//        transactionPayPalEUR2.setParentTransactions(transactionPayPalEUR2);
 
         Transaction transactionPayPalGBP3 = new Transaction();
         transactionPayPalGBP3.setAccount(accountPayPal);
@@ -54,7 +52,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         transactionPayPalGBP3.setCategory("Payment gateways");
         transactionPayPalGBP3.setDate(new Date());
         transactionPayPalGBP3.setDescription("To Euro");
-        transactionPayPalGBP3.setParentTransactions(transactionPayPalGBP3);
+//        transactionPayPalGBP3.setParentTransactions(transactionPayPalGBP3);
 
         Transaction transactionPayPalGBP4 = new Transaction();
         transactionPayPalGBP4.setAccount(accountPayPal);
@@ -62,9 +60,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         transactionPayPalGBP4.setCategory("Payment gateways");
         transactionPayPalGBP4.setDate(new Date());
         transactionPayPalGBP4.setDescription("Credit Card");
-        transactionPayPalGBP4.setParentTransactions(transactionPayPalGBP4);
+//        transactionPayPalGBP4.setParentTransactions(transactionPayPalGBP4);
 
-        Set<Transaction> payPalTransactions = Set.of(transactionPayPalEUR1, transactionPayPalEUR2, transactionPayPalGBP3, transactionPayPalGBP4);
+        List<Transaction> payPalTransactions = List.of(transactionPayPalEUR1, transactionPayPalEUR2, transactionPayPalGBP3, transactionPayPalGBP4);
         accountPayPal.setTransactions(payPalTransactions);
 
         accountRepository.save(accountPayPal);
@@ -83,7 +81,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         Account accountPayPal = accountRepository.findByName("Paypal");
 
-        Set<Transaction> subTransactionRevolutNYTSubscription = new HashSet<>();
+        List<Transaction> subTransactionRevolutNYTSubscription = new ArrayList<>();
 
         for (Transaction payPal : accountPayPal.getTransactions()) {
             subTransactionRevolutNYTSubscription.add(payPal);
@@ -91,7 +89,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         transactionRevolutNYTSubscription.setSubTransactions(subTransactionRevolutNYTSubscription);
 
-        Set<Transaction> transactionsRevolut = new HashSet<>();
+        List<Transaction> transactionsRevolut = new ArrayList<>();
         transactionsRevolut.add(transactionRevolutNYTSubscription);
 
 

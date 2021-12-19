@@ -15,11 +15,6 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-    @GetMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
-    }
-
     @GetMapping("/transaction/account/{id}")
     List<Transaction> listTransactionsByAccountId(@PathVariable Long id) {
         Pageable firstPageWithTwoElements = PageRequest.of(0, 2);

@@ -1,8 +1,11 @@
 package com.example.firstjunidemo.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,10 +19,12 @@ public class Transaction {
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Transaction parentTransactions;
 
     @OneToMany(mappedBy = "parentTransactions")
-    private Set<Transaction> subTransactions;
+    @JsonIgnore
+    private List<Transaction> subTransactions;
 
     private String description;
 
@@ -53,11 +58,11 @@ public class Transaction {
         this.parentTransactions = parentTransactions;
     }
 
-    public Set<Transaction> getSubTransactions() {
+    public List<Transaction> getSubTransactions() {
         return subTransactions;
     }
 
-    public void setSubTransactions(Set<Transaction> subTransactions) {
+    public void setSubTransactions(List<Transaction> subTransactions) {
         this.subTransactions = subTransactions;
     }
 

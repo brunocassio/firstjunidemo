@@ -1,8 +1,10 @@
 package com.example.firstjunidemo.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -12,7 +14,8 @@ public class Account {
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Transaction> transactions;
+    @JsonIgnore
+    private List<Transaction> transactions;
 
     private String name;
 
@@ -24,11 +27,11 @@ public class Account {
         this.id = id;
     }
 
-    public Set<Transaction> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(Set<Transaction> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 
